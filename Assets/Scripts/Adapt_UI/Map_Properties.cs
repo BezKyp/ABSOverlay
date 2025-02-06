@@ -49,7 +49,6 @@ public class Map_Properties : MonoBehaviour
             GetComponent<Renderer>().material = material_good;
         }
 
-        //VoxelCalculation();
     }
 
     // Update is called once per frame

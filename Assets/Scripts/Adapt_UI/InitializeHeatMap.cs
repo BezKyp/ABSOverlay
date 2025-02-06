@@ -17,7 +17,7 @@ public class InitializeHeatMap : MonoBehaviour
     public List<GameObject> heatMapCubes;
     public Canvas UI;
     public List<GameObject> UI_Colliders;
-    //public Camera camera;
+    public Camera camera;
     public GameObject bestVoxel;
     private List<int> tempOccludedVoxels = new List<int>();
 
@@ -212,7 +212,7 @@ public class InitializeHeatMap : MonoBehaviour
         return int_voxel;
     }
 
-    /*private bool IsUIVisible(GameObject UI_Collider)
+    private bool IsUIVisible(GameObject UI_Collider)
     {
         if (heatMapCubes == null || UI_Collider == null) return false;
 
@@ -281,7 +281,7 @@ public class InitializeHeatMap : MonoBehaviour
                 */
 
 
-       // } 
+        } 
 
     public void ui_Calc()
     {
@@ -332,7 +332,7 @@ public class InitializeHeatMap : MonoBehaviour
     
     private void FixedUpdate()
     {
-        /*
+        
         time += Time.deltaTime;
 
         //mouseMove.GetMouseSpeed();
@@ -379,9 +379,8 @@ public class InitializeHeatMap : MonoBehaviour
             //Debug.Log("UI_Collider NOW Located in: " + UI_Collider.GetComponent<Transform>().transform.localPosition);
 
             time = time - interpolationPeriod;
-        }*/
+        }
 
-        ui_Calc();
 
 
         if (UI != null)
