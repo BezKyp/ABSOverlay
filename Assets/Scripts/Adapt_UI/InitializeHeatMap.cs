@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 //using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
+// using static UnityEditor.Progress;
 
 public class InitializeHeatMap : MonoBehaviour
 {
