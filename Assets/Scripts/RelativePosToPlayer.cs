@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+// using XRHandSubsystem.updatedHands;
 
 public class RelativePosToPlayer : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class RelativePosToPlayer : MonoBehaviour
     private Vector3 playerToHaz;
     private float height;
     public TMPro.TextMeshProUGUI tex;
+    public TMPro.TextMeshProUGUI extra_data;
     string type;
     static int ind;
 
@@ -45,6 +47,7 @@ public class RelativePosToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // min_dist = 0.2f;
         
         height = cam.transform.position.y - this.transform.position.y;
@@ -85,7 +88,7 @@ public class RelativePosToPlayer : MonoBehaviour
 
         closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
         playerToHaz = closest - cam.transform.position;
-        if(playerToHaz.magnitude < 0.05f) box.SetActive(true);
+        if(playerToHaz.magnitude < 0.1f) box.SetActive(true);
         else box.SetActive(false);
 
 
@@ -117,14 +120,22 @@ public class RelativePosToPlayer : MonoBehaviour
             taken = true;
             // mine = true;
             min_dist = playerToHaz.magnitude;
-            tex.text = type + "\n";
+            tex.text = type;
+            extra_data.text = type + "\n\n";
+
             // box.SetActive(true);
             // background.SetActive(true);
             playerToHaz = Vector3.Normalize(playerToHaz);
             float d = Vector3.SignedAngle(forward, playerToHaz, Vector3.forward);
-            // tex.text += "Horizontal angle: " + d.ToString("0.0");
-            if(h_dir < 0) tex.text += " to the left\n";
-            else tex.text += " to the right\n";
+            extra_data.text += "Horizontal angle: " + d.ToString("0.0");
+            if(h_dir < 0) {
+                tex.text += " to the left\n";
+                extra_data.text += " left\n\n";
+            }
+            else {
+                tex.text += " to the right\n";
+                extra_data.text += " right\n\n";
+            }
 
             forward = Vector3.Normalize(cam.TransformDirection(Vector3.forward));
             forward[0] = 0;
@@ -132,12 +143,25 @@ public class RelativePosToPlayer : MonoBehaviour
             playerToHaz[0] = 0;
             playerToHaz = Vector3.Normalize(playerToHaz);
             float v = Vector3.SignedAngle(forward, playerToHaz, Vector3.up);
-            // tex.text += "Vertical angle: " + v.ToString("0.0");
-            if(v_dir > 0) tex.text += " and down\n";
-            else tex.text += " and up\n";
+            extra_data.text += "Vertical angle: " + v.ToString("0.0");
+            if(v_dir > 0) {
+                tex.text += " and down ";
+                extra_data.text += " down\n\n";
+            }
+            else {
+                tex.text += " and up ";
+                extra_data.text += " down\n\n";
+            }
 
-            if (v > 60 || d > 60) tex.text += "Out of view\n";
-            else if (v > 16 || d > 16) tex.text += "In peripheral\n";
+            if (v > 60 || d > 60) {
+                tex.text += "out of view\n";
+                extra_data.text += "Out of view\n\n";
+            }
+            else if (v > 16 || d > 16) {
+                tex.text += "in peripheral\n";
+                extra_data.text += "Peripheral\n\n";
+            }
+            else extra_data.text += "Direct view\n\n";
 
             taken = false;
         }
