@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UI_Collider
+  - Trip Hazard
+  - Bound
+  - Hazard
+  - Moving Hazard
+  - Fall Hazard
+  - Slip Hazard
+  - Head Knocker
+  - Alarm_Area
+  - Pump_Area
   layers:
   - Default
   - TransparentFX

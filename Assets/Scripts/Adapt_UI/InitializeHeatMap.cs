@@ -100,6 +100,7 @@ public class InitializeHeatMap : MonoBehaviour
         
 
         cube.GetComponent<MeshRenderer>().enabled = false; //make og cube not visible
+        cube.GetComponent<Transform>().localPosition = new Vector3(-0.5f, 0.5f, -1f);
 
         if (!controller.renderBlueContainer)
         {
@@ -329,7 +330,30 @@ public class InitializeHeatMap : MonoBehaviour
 
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Alarm_Area")
+        {
+            UI.GetComponent<Image_Switch>().Alarm.enabled = true;
+        }
+
+        if (other.gameObject.tag == "Pump_Area")
+        {
+            UI.GetComponent<Image_Switch>().Pump.enabled = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if ((other.gameObject.tag == "Alarm_Area") || (other.gameObject.tag == "Pump_Area"))
+        {
+            UI.GetComponent<Image_Switch>().Alarm.enabled = false;
+            UI.GetComponent<Image_Switch>().Pump.enabled = false;
+        }
+
+    }
+
+
     private void FixedUpdate()
     {
         
