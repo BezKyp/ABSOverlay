@@ -17,6 +17,9 @@ public class RelativePosToPlayer : MonoBehaviour
     public GameObject pipe3;
     public GameObject hk1;
     public GameObject hk2;
+    public GameObject kk1;
+    public GameObject kk2;
+    public GameObject th;
 
 
 
@@ -42,6 +45,7 @@ public class RelativePosToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // min_dist = 0.2f;
         
         height = cam.transform.position.y - this.transform.position.y;
         //dictionary
@@ -71,7 +75,7 @@ public class RelativePosToPlayer : MonoBehaviour
             }
 
         //relative pos
-        GameObject[] hazs = {pipe1, pipe2, pipe3, hk1, hk2};
+        GameObject[] hazs = {pipe1, pipe2, pipe3, hk1, hk2, kk1, kk2, th};
         
         // ind = 2;
         
@@ -79,12 +83,17 @@ public class RelativePosToPlayer : MonoBehaviour
         Vector3 closest;
         forward = Vector3.Normalize(cam.TransformDirection(Vector3.forward));
 
-        for(int i = 0; i < 5; i++) {
+        closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
+        playerToHaz = closest - cam.transform.position;
+        if(playerToHaz.magnitude < 0.05f) box.SetActive(true);
+        else box.SetActive(false);
+
+
+        for(int i = 0; i < 8; i++) {
             closest = (hazs[i].GetComponent<Collider>().ClosestPoint(cam.position));
 
             playerToHaz = closest - cam.transform.position;
                 // Debug.Log("i: " + i + ", dist: " + playerToHaz.magnitude + "\n");
-
             if(playerToHaz.magnitude <= min_dist) {
                 min_dist = playerToHaz.magnitude;
                 ind = i;
@@ -109,11 +118,11 @@ public class RelativePosToPlayer : MonoBehaviour
             // mine = true;
             min_dist = playerToHaz.magnitude;
             tex.text = type + "\n";
-            box.SetActive(true);
+            // box.SetActive(true);
             // background.SetActive(true);
             playerToHaz = Vector3.Normalize(playerToHaz);
             float d = Vector3.SignedAngle(forward, playerToHaz, Vector3.forward);
-            tex.text += "Horizontal angle: " + d.ToString("0.0");
+            // tex.text += "Horizontal angle: " + d.ToString("0.0");
             if(h_dir < 0) tex.text += " to the left\n";
             else tex.text += " to the right\n";
 
@@ -123,9 +132,9 @@ public class RelativePosToPlayer : MonoBehaviour
             playerToHaz[0] = 0;
             playerToHaz = Vector3.Normalize(playerToHaz);
             float v = Vector3.SignedAngle(forward, playerToHaz, Vector3.up);
-            tex.text += "Vertical angle: " + v.ToString("0.0");
-            if(v_dir > 0) tex.text += " down\n";
-            else tex.text += " up\n";
+            // tex.text += "Vertical angle: " + v.ToString("0.0");
+            if(v_dir > 0) tex.text += " and down\n";
+            else tex.text += " and up\n";
 
             if (v > 60 || d > 60) tex.text += "Out of view\n";
             else if (v > 16 || d > 16) tex.text += "In peripheral\n";
