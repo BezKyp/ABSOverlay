@@ -17,7 +17,7 @@ public class InitializeHeatMap : MonoBehaviour
     public List<GameObject> heatMapCubes;
     public Canvas UI;
     public List<GameObject> UI_Colliders;
-    public Camera camera;
+    //public Camera camera;
     public GameObject bestVoxel;
     private List<int> tempOccludedVoxels = new List<int>();
 
@@ -84,6 +84,7 @@ public class InitializeHeatMap : MonoBehaviour
                     cubeCopy.GetComponent<Map_Properties>().id = new Vector3(i, j, k);
                     cubeCopy.GetComponent<Map_Properties>().pos = cubeCopy.GetComponent<Transform>().localPosition;
                     cubeCopy.GetComponent<Map_Properties>().pos_id = pos_id;
+                    cubeCopy.GetComponent<Transform>().localScale = new Vector3(0.03f, 0.03f, 0.04f);
 
                     pos_id += 1;
 
@@ -103,6 +104,8 @@ public class InitializeHeatMap : MonoBehaviour
             this.GetComponent<Renderer>().enabled = false;//
 
         }
+
+        ui_Calc();
 
     }
 
@@ -208,7 +211,7 @@ public class InitializeHeatMap : MonoBehaviour
         return int_voxel;
     }
 
-    private bool IsUIVisible(GameObject UI_Collider)
+    /*private bool IsUIVisible(GameObject UI_Collider)
     {
         if (heatMapCubes == null || UI_Collider == null) return false;
 
@@ -277,7 +280,7 @@ public class InitializeHeatMap : MonoBehaviour
                 */
 
 
-        }
+       // } 
 
     public void ui_Calc()
     {
@@ -325,6 +328,7 @@ public class InitializeHeatMap : MonoBehaviour
 
     }
 
+    /*
     private void FixedUpdate()
     {
         time += Time.deltaTime;
@@ -381,7 +385,7 @@ public class InitializeHeatMap : MonoBehaviour
             UI_Colliders[0].transform.localPosition = UI.transform.localPosition; // Keep collider in sync
         }
 
-    }
+    }*/
 
 
 }
