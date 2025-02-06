@@ -48,14 +48,17 @@ public class Map_Properties : MonoBehaviour
         {
             GetComponent<Renderer>().material = material_good;
         }
+
+        //VoxelCalculation();
     }
 
     // Update is called once per frame
+    
     void FixedUpdate() 
     {
 
         VoxelCalculation();
-        
+       
     }
 
     public void VoxelCalculation() // For rendering the material and placing the UI
@@ -73,7 +76,10 @@ public class Map_Properties : MonoBehaviour
         {
             finalVal = 1;
             if (controller.renderVoxelGrad == true)
+            {
                 GetComponent<Renderer>().material = material_bad;
+                GetComponent <MeshRenderer>().enabled = false;
+            }
 
         }
     }

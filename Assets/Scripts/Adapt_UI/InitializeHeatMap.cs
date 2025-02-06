@@ -95,6 +95,8 @@ public class InitializeHeatMap : MonoBehaviour
         }
 
         armReachCalc();
+
+
         
 
         cube.GetComponent<MeshRenderer>().enabled = false; //make og cube not visible
@@ -105,7 +107,6 @@ public class InitializeHeatMap : MonoBehaviour
 
         }
 
-        ui_Calc();
 
     }
 
@@ -328,9 +329,10 @@ public class InitializeHeatMap : MonoBehaviour
 
     }
 
-    /*
+    
     private void FixedUpdate()
     {
+        /*
         time += Time.deltaTime;
 
         //mouseMove.GetMouseSpeed();
@@ -377,7 +379,10 @@ public class InitializeHeatMap : MonoBehaviour
             //Debug.Log("UI_Collider NOW Located in: " + UI_Collider.GetComponent<Transform>().transform.localPosition);
 
             time = time - interpolationPeriod;
-        }
+        }*/
+
+        ui_Calc();
+
 
         if (UI != null)
         {
@@ -385,7 +390,7 @@ public class InitializeHeatMap : MonoBehaviour
             UI_Colliders[0].transform.localPosition = UI.transform.localPosition; // Keep collider in sync
         }
 
-    }*/
+    }
 
 
 }
