@@ -56,9 +56,9 @@ public class Alignment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_TrackedImageManager == null)
+       /* if(m_TrackedImageManager == null)
         {
             tex.text = "Could not find tracked image manager";
-        }
+        }*/
     }
 }
