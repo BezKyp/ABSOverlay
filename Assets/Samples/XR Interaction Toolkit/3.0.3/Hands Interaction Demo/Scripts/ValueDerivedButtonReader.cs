@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
+using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 
 
@@ -20,7 +25,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         public bool renderVoxelGrad;
         public bool renderBlueContainer;
 
-        private List<UnityEngine.XR.InputDevice> inputDevices;
 
 
         [SerializeField]
@@ -78,31 +82,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
             m_ValueInput?.DisableDirectActionIfModeUsed();
         }
 
-        void Start()
-        {
-            inputDevices = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevices(inputDevices);
-
-            foreach (var device in inputDevices)
-            {
-                Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-            }
-
-            var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
-
-            if (leftHandDevices.Count == 1)
-            {
-                UnityEngine.XR.InputDevice device = leftHandDevices[0];
-                Debug.Log(string.Format("Device name '{0}' with role '{1}'", device.name, device.role.ToString()));
-            }
-            else if (leftHandDevices.Count > 1)
-            {
-                Debug.Log("Found more than one left hand!");
-            }
-
-
-        }
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.

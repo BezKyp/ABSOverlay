@@ -5365,6 +5365,14 @@ PrefabInstance:
       propertyPath: m_RaycastMask.m_Bits
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 1995425173841092538, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: m_RayInteractorChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995425173841092538, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: m_RayInteractorChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2080763738127582707, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: data_ui
       value: 
@@ -5635,6 +5643,7 @@ MonoBehaviour:
   renderUI: 0
   renderVoxelGrad: 0
   renderBlueContainer: 0
+  leftControllerButton: {fileID: 0}
   m_ValueInput:
     m_InputSourceMode: 2
     m_InputAction:
