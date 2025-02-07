@@ -292,6 +292,7 @@ MonoBehaviour:
   camera: {fileID: 1109407790274764220}
   bestVoxel: {fileID: 0}
   controller: {fileID: 793009405}
+  interReader: {fileID: 3001774293689589086}
   interpolationPeriod: 2
   transitionSpeed: 5
 --- !u!23 &41872296
@@ -1636,7 +1637,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.06966942, y: 0.0000031143427, z: -0.00000021746382, w: 0.9975702}
   m_LocalPosition: {x: 0, y: -0.013061047, z: 0.1870166}
-  m_LocalScale: {x: 0.8, y: 0.65, z: 0.9}
+  m_LocalScale: {x: 0.6, y: 0.5, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 41872294}
@@ -2432,6 +2433,7 @@ MonoBehaviour:
     m_Bits: 64
   initializeHeatMap: {fileID: 41872295}
   controller: {fileID: 793009405}
+  interReader: {fileID: 3001774293689589086}
 --- !u!65 &1124180539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5507,6 +5509,14 @@ PrefabInstance:
       propertyPath: m_TrackedHandModeStarted.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 829750175057160187, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: data_ui
+      value: 
+      objectReference: {fileID: 1034839540}
+    - target: {fileID: 829750175057160187, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: renderUI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2970068989662574442, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_DestroyObjectsButton
       value: 
@@ -5515,9 +5525,17 @@ PrefabInstance:
       propertyPath: m_ObjectSelectorDropdown
       value: 
       objectReference: {fileID: 1891673207}
+    - target: {fileID: 3028907107040758489, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 3540285630127457094, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_Name
       value: MR Interaction Setup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5241341206321302839, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 5632266133985503989, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5720,6 +5738,17 @@ MonoBehaviour:
   m_TrackedImageManager: {fileID: 3001774293689589084}
   marker_env: {fileID: 2142230161}
   tex: {fileID: 643946022}
+--- !u!114 &3001774293689589086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 829750175057160187, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+  m_PrefabInstance: {fileID: 3001774293689589082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf47ae772fb3421292887025bf9b5820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3001774293689589092
 MonoBehaviour:
   m_ObjectHideFlags: 0

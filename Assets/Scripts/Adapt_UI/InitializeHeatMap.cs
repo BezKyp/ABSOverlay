@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Unity.XR.CoreUtils;
+using UnityEngine.XR.Interaction.Toolkit.Samples.Hands;
 
 //using Unity.VisualScripting;
 using UnityEngine;
@@ -28,9 +29,10 @@ public class InitializeHeatMap : MonoBehaviour
     //public MouseMovementTracker mouseMove;
 
     public Global_Controller controller;
+    public ValueDerivedButtonReader interReader;
 
     private float time = 0.0f;    
-    public float interpolationPeriod = 2f;
+    public float interpolationPeriod = 3.5f;
 
     private Vector3 targetPosition; // The new voxel position
     private Vector3 velocity = Vector3.zero; // Needed for SmoothDamp
@@ -117,10 +119,15 @@ public class InitializeHeatMap : MonoBehaviour
         cube.GetComponent<MeshRenderer>().enabled = false; //make og cube not visible
         cube.GetComponent<Transform>().localPosition = new Vector3(-0.5f, 0.5f, -1f);
 
-        if (!controller.renderBlueContainer)
+        /*if (!controller.renderBlueContainer)
         {
             this.GetComponent<Renderer>().enabled = false;
 
+        }*/
+
+        if (!interReader.renderBlueContainer)
+        {
+            this.GetComponent<Renderer>().enabled = false;
         }
 
 
