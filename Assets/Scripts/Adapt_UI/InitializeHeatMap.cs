@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Unity.XR.CoreUtils;
+
 //using Unity.VisualScripting;
 using UnityEngine;
 // using static UnityEditor.Progress;
 
 public class InitializeHeatMap : MonoBehaviour
 {
+    private Vector3 lastPosition;
+
     public float armReach;
 
     public GameObject cube;
@@ -32,6 +36,7 @@ public class InitializeHeatMap : MonoBehaviour
     private Vector3 velocity = Vector3.zero; // Needed for SmoothDamp
     public float transitionSpeed = 5f; // Controls movement speed
 
+    private float prevVoxelVal;
     // cube set scale to 0.2 to match to 0.2x0.2 canvas
     // so just set the scale to the w/h of the canvas
     // and divide the UC_size w/h/l by the scale of the cube to find out how many can be placed in each direction
@@ -48,6 +53,7 @@ public class InitializeHeatMap : MonoBehaviour
 
         UC_size = new Vector3(UC_size.x * UC_scale.x, UC_size.y * UC_scale.y, UC_size.z * UC_scale.z);
         */
+
 
         float UI_w = 0.15f;
         float UI_h = 0.15f;
@@ -208,11 +214,22 @@ public class InitializeHeatMap : MonoBehaviour
 
     private int bestVoxelSearch(int int_voxel, float temp_int)
     {
+        /*List<float> finalVals = new List<float>();
+
         for (int i = 0; i < heatMapCubes.Count; i++)
         {
-            if (heatMapCubes[i].GetComponent<Map_Properties>().finalVal < temp_int)
+            finalVals.Add(heatMapCubes[i].GetComponent<Map_Properties>().finalVal);
+        
+        }
+
+        Debug.Log(finalVals);*/
+
+        for (int i = 0; i < heatMapCubes.Count; i++)
+        {
+            if ((heatMapCubes[i].GetComponent<Map_Properties>().finalVal < temp_int) && (heatMapCubes[i].GetComponent<Map_Properties>().finalVal < 1.0f))
             {
                 //bestVoxel = heatMapCubes[i];
+
                 temp_int = heatMapCubes[i].GetComponent<Map_Properties>().finalVal;
                 int_voxel = i;
             }
@@ -300,13 +317,13 @@ public class InitializeHeatMap : MonoBehaviour
         float temp_int = 2; // made this 2 since all voxel calc values will be less than two (voxel range 0-1)
         int_voxel = bestVoxelSearch(int_voxel, temp_int);
 
-        float prevVoxel_Val = (bestVoxel != null) ?
+        float t_prevVoxel_Val = (bestVoxel != null) ?
         heatMapCubes[bestVoxel.GetComponent<Map_Properties>().pos_id].GetComponent<Map_Properties>().finalVal :
         2f;
 
         float newVoxelVal = heatMapCubes[int_voxel].GetComponent<Map_Properties>().finalVal;
 
-        if ((prevVoxel_Val >= 0.5) || (((prevVoxel_Val - newVoxelVal) / prevVoxel_Val) >= 0.45)) // Should stabilize voxel movement a lil
+        if ((t_prevVoxel_Val >= 0.75) || (((t_prevVoxel_Val - newVoxelVal) / t_prevVoxel_Val) >= 0.65)) // Should stabilize voxel movement a lil
         {
             bestVoxel = heatMapCubes[int_voxel];
             //bestVoxel.GetComponent<Transform>().localPosition = heatMapCubes[int_voxel].GetComponent<Transform>().localPosition;
@@ -326,7 +343,7 @@ public class InitializeHeatMap : MonoBehaviour
 
             Physics.SyncTransforms(); // Force Unity to update the physics system
         }
-
+        
 
         
 
@@ -340,6 +357,24 @@ public class InitializeHeatMap : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Alarm_Area")
+        {
+            UI.GetComponent<Image_Switch>().Alarm.enabled = true;
+        }
+
+        if (other.gameObject.tag == "Pump_Area")
+        {
+            UI.GetComponent<Image_Switch>().Pump.enabled = true;
+        }
+
+        if (other.gameObject.tag == "STG_Area")
+        {
+            UI.GetComponent<Image_Switch>().STG.enabled = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Alarm_Area")
         {
@@ -384,7 +419,12 @@ public class InitializeHeatMap : MonoBehaviour
             // check raytrace
             // else: just continue
 
-            tempOcclusionUnCover();
+            Vector3 movement = camera.GetComponent<Transform>().position - lastPosition;
+            if (movement.magnitude > 0.01f) // Small threshold to detect movement
+            {
+                tempOcclusionUnCover();
+            }
+            lastPosition = camera.GetComponent<Transform>().position;
 
             int iter = 0;
 
@@ -393,7 +433,7 @@ public class InitializeHeatMap : MonoBehaviour
             {
                 ui_Calc();
 
-                if (iter > 5) // creating a quit from the loop so it doesnt go forever, only for demo
+                if (iter > 7) // creating a quit from the loop so it doesnt go forever, only for demo
                 {
                     flag = true;
                 }

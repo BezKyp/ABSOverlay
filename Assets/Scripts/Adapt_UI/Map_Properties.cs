@@ -86,7 +86,7 @@ public class Map_Properties : MonoBehaviour
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Bound" || other.gameObject.layer == 6)
+            if (other.gameObject.tag == "Bound")
             {
                 //print("collided");
                 //GetComponent<MeshRenderer>().materials[0] = material_bad;
@@ -99,7 +99,7 @@ public class Map_Properties : MonoBehaviour
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.tag == "Bound" || other.gameObject.layer == 6)
+            if (other.gameObject.tag == "Bound")
             {
                 //print("stay");
                 //GetComponent<MeshRenderer>().materials[0] = material_bad;
@@ -110,7 +110,7 @@ public class Map_Properties : MonoBehaviour
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Bound" || other.gameObject.layer == 6)
+            if (other.gameObject.tag == "Bound")
             {
                 //print("exit");
                 //GetComponent<MeshRenderer>().materials[0] = material_good;
