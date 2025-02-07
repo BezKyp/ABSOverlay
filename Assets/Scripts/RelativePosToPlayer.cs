@@ -88,6 +88,7 @@ public class RelativePosToPlayer : MonoBehaviour
 
         closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
         playerToHaz = closest - cam.transform.position;
+        playerToHaz[1] = 0;
         if(playerToHaz.magnitude < 1.0f) box.SetActive(true);
         else box.SetActive(false);
 
@@ -170,7 +171,7 @@ public class RelativePosToPlayer : MonoBehaviour
             // tex.text = "";
             taken = false;
             // mine = false;
-            box.SetActive(false);
+            // box.SetActive(false);
         }
         
     }
