@@ -4,6 +4,7 @@ using System.Collections.Generic;
 //using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.XR.Interaction.Toolkit.Samples.Hands;
 
 public class Map_Properties : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Map_Properties : MonoBehaviour
     public LayerMask bound_layer;
     public InitializeHeatMap initializeHeatMap;
     public Global_Controller controller;
+    public ValueDerivedButtonReader interReader;
 
 
 
@@ -44,7 +46,11 @@ public class Map_Properties : MonoBehaviour
         gak[2].alpha = 0.4F;
         gak[2].time = 1.0F;
         g.SetKeys(gck, gak);
-        if (controller.renderVoxelGrad == true)
+        /*if (controller.renderVoxelGrad == true)
+        {
+            GetComponent<Renderer>().material = material_good;
+        }*/
+        if (interReader.renderVoxelGrad == true)
         {
             GetComponent<Renderer>().material = material_good;
         }
@@ -65,7 +71,12 @@ public class Map_Properties : MonoBehaviour
         if (isOccluded == false)
         {
             finalVal = interactionReach;
-            if (controller.renderVoxelGrad == true)
+            /*if (controller.renderVoxelGrad == true)
+            {
+                GetComponent<Renderer>().material.color = g.Evaluate(finalVal);
+                GetComponent<MeshRenderer>().enabled = true;
+            }      */      
+            if (interReader.renderVoxelGrad == true)
             {
                 GetComponent<Renderer>().material.color = g.Evaluate(finalVal);
                 GetComponent<MeshRenderer>().enabled = true;
@@ -75,7 +86,12 @@ public class Map_Properties : MonoBehaviour
         else
         {
             finalVal = 1;
-            if (controller.renderVoxelGrad == true)
+            /*if (controller.renderVoxelGrad == true)
+            {
+                GetComponent<Renderer>().material = material_bad;
+                GetComponent <MeshRenderer>().enabled = false;
+            }     */       
+            if (interReader.renderVoxelGrad == true)
             {
                 GetComponent<Renderer>().material = material_bad;
                 GetComponent <MeshRenderer>().enabled = false;

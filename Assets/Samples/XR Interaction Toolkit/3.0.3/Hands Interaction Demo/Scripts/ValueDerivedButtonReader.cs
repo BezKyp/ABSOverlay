@@ -1,5 +1,7 @@
 ﻿using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
+
+
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
 {
     /// <summary>
@@ -10,7 +12,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
     public class ValueDerivedButtonReader : MonoBehaviour, IXRInputButtonReader
     {
         [SerializeField] GameObject data_ui;
+        public bool renderHazards;
+        public bool renderUI;
+
+        public bool renderVoxelGrad;
+        public bool renderBlueContainer;
         
+
         [SerializeField]
         [Tooltip("The input reader used to reference the float value to convert to a bool.")]
         XRInputValueReader<float> m_ValueInput = new XRInputValueReader<float>("Value");
@@ -34,7 +42,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnEnable()
         {
-            data_ui.SetActive(false);
+            if (renderHazards == true)
+            {
+                data_ui.SetActive(false);
+            }
+            if (renderUI == true)
+            {
+                renderVoxelGrad = false;
+            }
+
             m_ValueInput?.EnableDirectActionIfModeUsed();
         }
 
@@ -43,7 +59,16 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnDisable()
         {
-            data_ui.SetActive(true);
+            if (renderHazards == true)
+            {
+                data_ui.SetActive(true);
+            }
+            if (renderUI == true)
+            {
+                renderVoxelGrad = true;
+            }
+            
+            
             m_ValueInput?.DisableDirectActionIfModeUsed();
         }
 
