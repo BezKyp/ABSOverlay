@@ -1,4 +1,5 @@
-﻿using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
+﻿using System.Collections.Generic;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 
 
@@ -11,13 +12,16 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
     [DefaultExecutionOrder(XRInteractionUpdateOrder.k_XRInputDeviceButtonReader)]
     public class ValueDerivedButtonReader : MonoBehaviour, IXRInputButtonReader
     {
+
         [SerializeField] GameObject data_ui;
         public bool renderHazards;
         public bool renderUI;
 
         public bool renderVoxelGrad;
         public bool renderBlueContainer;
-        
+
+        private List<UnityEngine.XR.InputDevice> inputDevices;
+
 
         [SerializeField]
         [Tooltip("The input reader used to reference the float value to convert to a bool.")]
@@ -36,6 +40,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         bool m_IsPerformed;
         bool m_WasPerformedThisFrame;
         bool m_WasCompletedThisFrame;
+
+
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
@@ -70,6 +76,32 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
             
             
             m_ValueInput?.DisableDirectActionIfModeUsed();
+        }
+
+        void Start()
+        {
+            inputDevices = new List<UnityEngine.XR.InputDevice>();
+            UnityEngine.XR.InputDevices.GetDevices(inputDevices);
+
+            foreach (var device in inputDevices)
+            {
+                Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
+            }
+
+            var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
+            UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
+
+            if (leftHandDevices.Count == 1)
+            {
+                UnityEngine.XR.InputDevice device = leftHandDevices[0];
+                Debug.Log(string.Format("Device name '{0}' with role '{1}'", device.name, device.role.ToString()));
+            }
+            else if (leftHandDevices.Count > 1)
+            {
+                Debug.Log("Found more than one left hand!");
+            }
+
+
         }
 
         /// <summary>
