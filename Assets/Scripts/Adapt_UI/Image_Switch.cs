@@ -9,6 +9,7 @@ public class Image_Switch : MonoBehaviour
 
     public Image Alarm;
     public Image Pump;
+    public Image STG;
     void Start()
     {
         

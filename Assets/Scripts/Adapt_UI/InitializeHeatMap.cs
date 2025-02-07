@@ -40,13 +40,22 @@ public class InitializeHeatMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float UI_w = UI.GetComponent<RectTransform>().rect.width;
+        /*float UI_w = UI.GetComponent<RectTransform>().rect.width;
         float UI_h = UI.GetComponent<RectTransform>().rect.height;
 
         Vector3 UC_size = this.GetComponent<MeshFilter>().sharedMesh.bounds.size; 
         Vector3 UC_scale =  this.GetComponent<Transform>().localScale;
 
         UC_size = new Vector3(UC_size.x * UC_scale.x, UC_size.y * UC_scale.y, UC_size.z * UC_scale.z);
+        */
+
+        float UI_w = 0.15f;
+        float UI_h = 0.15f;
+
+        Vector3 UC_size = this.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+       // Vector3 UC_scale = this.GetComponent<Transform>().localScale;
+
+        //Vector3 UC_size = new Vector3(1.20f,1.0f,0.8f);
 
         float armR = armReach * 0.1f;
 
@@ -104,7 +113,7 @@ public class InitializeHeatMap : MonoBehaviour
 
         if (!controller.renderBlueContainer)
         {
-            this.GetComponent<Renderer>().enabled = false;//
+            this.GetComponent<Renderer>().enabled = false;
 
         }
 
@@ -341,14 +350,20 @@ public class InitializeHeatMap : MonoBehaviour
         {
             UI.GetComponent<Image_Switch>().Pump.enabled = true;
         }
+
+        if (other.gameObject.tag == "STG_Area")
+        {
+            UI.GetComponent<Image_Switch>().STG.enabled = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((other.gameObject.tag == "Alarm_Area") || (other.gameObject.tag == "Pump_Area"))
+        if ((other.gameObject.tag == "Alarm_Area") || (other.gameObject.tag == "Pump_Area") || (other.gameObject.tag == "STG_Area"))
         {
             UI.GetComponent<Image_Switch>().Alarm.enabled = false;
             UI.GetComponent<Image_Switch>().Pump.enabled = false;
+            UI.GetComponent<Image_Switch>().STG.enabled = false;
         }
 
     }
@@ -403,15 +418,15 @@ public class InitializeHeatMap : MonoBehaviour
             //Debug.Log("UI_Collider NOW Located in: " + UI_Collider.GetComponent<Transform>().transform.localPosition);
 
             time = time - interpolationPeriod;
+
         }
-
-
 
         if (UI != null)
         {
             UI.transform.localPosition = Vector3.Lerp(UI.transform.localPosition, targetPosition, transitionSpeed * Time.deltaTime);
             UI_Colliders[0].transform.localPosition = UI.transform.localPosition; // Keep collider in sync
         }
+
 
     }
 
