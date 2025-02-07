@@ -29,7 +29,7 @@ public class InitializeHeatMap : MonoBehaviour
     //public MouseMovementTracker mouseMove;
 
     public Global_Controller controller;
-    public ValueDerivedButtonReader interReader;
+    //public ValueDerivedButtonReader interReader;
 
     private float time = 0.0f;    
     public float interpolationPeriod = 4f;
@@ -123,12 +123,12 @@ public class InitializeHeatMap : MonoBehaviour
         {
             this.GetComponent<Renderer>().enabled = false;
 
-        }*/
+        }
 
         if (!interReader.renderBlueContainer)
         {
             this.GetComponent<Renderer>().enabled = false;
-        }
+        }*/
 
 
     }

@@ -24,7 +24,7 @@ public class Map_Properties : MonoBehaviour
     public LayerMask bound_layer;
     public InitializeHeatMap initializeHeatMap;
     public Global_Controller controller;
-    public ValueDerivedButtonReader interReader;
+    //public ValueDerivedButtonReader interReader;
 
 
 
@@ -49,11 +49,11 @@ public class Map_Properties : MonoBehaviour
         /*if (controller.renderVoxelGrad == true)
         {
             GetComponent<Renderer>().material = material_good;
-        }*/
+        }
         if (interReader.renderVoxelGrad == true)
         {
             GetComponent<Renderer>().material = material_good;
-        }
+        }*/
 
     }
 
@@ -75,12 +75,12 @@ public class Map_Properties : MonoBehaviour
             {
                 GetComponent<Renderer>().material.color = g.Evaluate(finalVal);
                 GetComponent<MeshRenderer>().enabled = true;
-            }      */      
+            }           
             if (interReader.renderVoxelGrad == true)
             {
                 GetComponent<Renderer>().material.color = g.Evaluate(finalVal);
                 GetComponent<MeshRenderer>().enabled = true;
-            }
+            }*/ 
             
         }
         else
@@ -90,12 +90,12 @@ public class Map_Properties : MonoBehaviour
             {
                 GetComponent<Renderer>().material = material_bad;
                 GetComponent <MeshRenderer>().enabled = false;
-            }     */       
+            }        
             if (interReader.renderVoxelGrad == true)
             {
                 GetComponent<Renderer>().material = material_bad;
                 GetComponent <MeshRenderer>().enabled = false;
-            }
+            } */   
 
         }
     }
@@ -137,27 +137,7 @@ public class Map_Properties : MonoBehaviour
         }
 
 
-        /* void OnCollisionEnter(Collision col)
-         {
-             if(col.gameObject.tag == "Bound" || col.gameObject.layer == 6)
-             {
-                 print("collided");
-                 GetComponent<MeshRenderer>().materials[0] = material_bad;
-                 isOccluded = true;
-             }
 
-         }
-
-         void OnCollisionStay(Collision col)
-         {
-             if (col.gameObject.tag == "Bound" || col.gameObject.layer == 6)
-             {
-                 print("collided");
-                 GetComponent<MeshRenderer>().materials[0] = material_bad;
-                 isOccluded = true;
-             }
-
-         }*/
 
 
 
