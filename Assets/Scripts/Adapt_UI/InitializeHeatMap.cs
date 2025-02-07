@@ -32,7 +32,7 @@ public class InitializeHeatMap : MonoBehaviour
     public ValueDerivedButtonReader interReader;
 
     private float time = 0.0f;    
-    public float interpolationPeriod = 3.5f;
+    public float interpolationPeriod = 4f;
 
     private Vector3 targetPosition; // The new voxel position
     private Vector3 velocity = Vector3.zero; // Needed for SmoothDamp
@@ -440,7 +440,7 @@ public class InitializeHeatMap : MonoBehaviour
             {
                 ui_Calc();
 
-                if (iter > 7) // creating a quit from the loop so it doesnt go forever, only for demo
+                if (iter > 9) // creating a quit from the loop so it doesnt go forever, only for demo
                 {
                     flag = true;
                 }
