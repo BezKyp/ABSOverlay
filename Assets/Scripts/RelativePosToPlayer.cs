@@ -88,7 +88,7 @@ public class RelativePosToPlayer : MonoBehaviour
 
         closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
         playerToHaz = closest - cam.transform.position;
-        if(playerToHaz.magnitude < 0.1f) box.SetActive(true);
+        if(playerToHaz.magnitude < 1.0f) box.SetActive(true);
         else box.SetActive(false);
 
 

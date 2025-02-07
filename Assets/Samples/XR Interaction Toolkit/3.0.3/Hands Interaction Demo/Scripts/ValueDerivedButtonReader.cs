@@ -9,6 +9,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
     [DefaultExecutionOrder(XRInteractionUpdateOrder.k_XRInputDeviceButtonReader)]
     public class ValueDerivedButtonReader : MonoBehaviour, IXRInputButtonReader
     {
+        [SerializeField] GameObject data_ui;
+        
         [SerializeField]
         [Tooltip("The input reader used to reference the float value to convert to a bool.")]
         XRInputValueReader<float> m_ValueInput = new XRInputValueReader<float>("Value");
@@ -32,6 +34,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnEnable()
         {
+            data_ui.SetActive(false);
             m_ValueInput?.EnableDirectActionIfModeUsed();
         }
 
@@ -40,6 +43,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnDisable()
         {
+            data_ui.SetActive(true);
             m_ValueInput?.DisableDirectActionIfModeUsed();
         }
 
