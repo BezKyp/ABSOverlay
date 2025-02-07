@@ -12,7 +12,13 @@ using UnityEngine;
         public bool fov;
         public bool interaction;
         public bool neighbor;
-        public bool mouseSpeedText;
+
+        public bool ALARM;
+        public bool PUMP;
+        public bool STG;
+
+    public int UI_POS;
+
         void Start()
         {
 
