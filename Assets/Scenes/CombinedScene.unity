@@ -5643,7 +5643,6 @@ MonoBehaviour:
   renderUI: 0
   renderVoxelGrad: 0
   renderBlueContainer: 0
-  leftControllerButton: {fileID: 0}
   m_ValueInput:
     m_InputSourceMode: 2
     m_InputAction:
@@ -6128,7 +6127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3181733770671768603, guid: c83299ca9a97dd44da759208ffc1ea6b, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3774851815958921834, guid: c83299ca9a97dd44da759208ffc1ea6b, type: 3}
       propertyPath: th
@@ -6257,6 +6256,10 @@ PrefabInstance:
     - target: {fileID: 8374637033354020265, guid: c83299ca9a97dd44da759208ffc1ea6b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538012427724543007, guid: c83299ca9a97dd44da759208ffc1ea6b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6827879291626264203, guid: c83299ca9a97dd44da759208ffc1ea6b, type: 3}

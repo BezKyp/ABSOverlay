@@ -40,7 +40,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         [Tooltip("The threshold value to use to determine when the button is released when it was previously pressed. Keeps being pressed until falls back to a value of or below this value.")]
         [Range(0f, 1f)]
         float m_ReleaseThreshold = 0.25f;
-
+        public bool is_on;
         bool m_IsPerformed;
         bool m_WasPerformedThisFrame;
         bool m_WasCompletedThisFrame;
@@ -54,14 +54,22 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         {
             if (renderHazards == true)
             {
-                data_ui.SetActive(false);
-            }
-            if (renderUI == true)
-            {
-                renderVoxelGrad = false;
-            }
+                if(is_on) {
+                    data_ui.SetActive(false);
+                    is_on = false;
+                }
+                else {
+                    data_ui.SetActive(true);
+                    is_on = true;
+                }
 
-            m_ValueInput?.EnableDirectActionIfModeUsed();
+            }
+            // if (renderUI == true)
+            // {
+            //     renderVoxelGrad = false;
+            // }
+
+            // m_ValueInput?.EnableDirectActionIfModeUsed();
         }
 
         /// <summary>
@@ -69,17 +77,17 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnDisable()
         {
-            if (renderHazards == true)
-            {
-                data_ui.SetActive(true);
-            }
-            if (renderUI == true)
-            {
-                renderVoxelGrad = true;
-            }
+            // if (renderHazards == true)
+            // {
+            //     data_ui.SetActive(true);
+            // }
+            // if (renderUI == true)
+            // {
+            //     renderVoxelGrad = true;
+            // }
             
             
-            m_ValueInput?.DisableDirectActionIfModeUsed();
+            // m_ValueInput?.DisableDirectActionIfModeUsed();
         }
 
 

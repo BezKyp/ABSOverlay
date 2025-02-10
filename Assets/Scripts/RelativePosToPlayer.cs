@@ -12,7 +12,8 @@ public class RelativePosToPlayer : MonoBehaviour
     public GameObject warning;
     public GameObject background;
     public GameObject box;
-
+    public Animator alertanim;
+    public AudioSource alertsfx;
     public GameObject pipe1;
     public GameObject pipe2;
     public GameObject pipe3;
@@ -23,7 +24,9 @@ public class RelativePosToPlayer : MonoBehaviour
     public GameObject th;
 
 
-
+    private int num_hk;
+    private int num_kk;
+    private int num_th;
     private Vector3 forward;
     private Vector3 playerToHaz;
     private float height;
@@ -41,13 +44,13 @@ public class RelativePosToPlayer : MonoBehaviour
     void Start() {
         // hazs = new List<GameObject>();
         // hazs = GameObject.FindGameObjectsWithTag("Hazard");
-        min_dist = 0.2f;
+        min_dist = 1.0f;
     }
     
     // Update is called once per frame
     void Update()
     {
-        
+        extra_data.text = "Closest hazard:\n\n";
         // min_dist = 0.2f;
         
         height = cam.transform.position.y - this.transform.position.y;
@@ -55,7 +58,7 @@ public class RelativePosToPlayer : MonoBehaviour
 
             switch(this.gameObject.name) {
                 case "Pipe":
-                    if (height > 0.5f) type = "Trip Hazard";
+                    if (height > 0f) type = "Trip Hazard";
                     else if (height > 0) type = "Knee Knocker";
                     else type = "Head Knocker";
                     break;
@@ -82,21 +85,36 @@ public class RelativePosToPlayer : MonoBehaviour
         
         // ind = 2;
         
+
         float h_dir, v_dir;
         Vector3 closest;
         forward = Vector3.Normalize(cam.TransformDirection(Vector3.forward));
+        
 
         closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
         playerToHaz = closest - cam.transform.position;
         playerToHaz[1] = 0;
-        if(playerToHaz.magnitude < 1.0f) box.SetActive(true);
-        else box.SetActive(false);
+        if(playerToHaz.magnitude < 1.0f) {
+            box.SetActive(true);
+            if(tex.text == "") {
+                alertanim.SetTrigger("Appear");
+                alertsfx.Play();
+            }
+            if(!tex.text.Contains(type)) tex.text += type + " ";
+        }
+        else {
+            box.SetActive(false);
+            tex.text.Replace(type, "");
+        }
 
-
+        // num_hk = 0;
+        // num_kk = 0;
+        // num_th = 0;
         for(int i = 0; i < 8; i++) {
             closest = (hazs[i].GetComponent<Collider>().ClosestPoint(cam.position));
 
             playerToHaz = closest - cam.transform.position;
+            playerToHaz[1] = 0;
                 // Debug.Log("i: " + i + ", dist: " + playerToHaz.magnitude + "\n");
             if(playerToHaz.magnitude <= min_dist) {
                 min_dist = playerToHaz.magnitude;
@@ -104,13 +122,15 @@ public class RelativePosToPlayer : MonoBehaviour
             }
         }
 
+        if(min_dist >= 0.2f) {
+            // tex.text = "";
+            // alertanim.SetTrigger("Disappear");
 
+        }
 
-                // Debug.Log("ind: " + ind + ", min_dist: " + min_dist + "\n");
-        if(hazs[ind] == this.gameObject /*|| !taken*/) {
-            // Debug.Log("ind: " + ind + "\n");
+        if(hazs[ind] == this.gameObject) {
             closest = (this.gameObject.GetComponent<Collider>().ClosestPoint(cam.position));
-
+            
             forward = Vector3.Normalize(cam.TransformDirection(Vector3.forward));
             playerToHaz = closest - cam.transform.position;
             h_dir = Vector3.Dot(playerToHaz, cam.transform.right);
@@ -119,22 +139,16 @@ public class RelativePosToPlayer : MonoBehaviour
             playerToHaz[1] = 0;
 
             taken = true;
-            // mine = true;
             min_dist = playerToHaz.magnitude;
-            tex.text = type;
-            extra_data.text = type + "\n\n";
+            extra_data.text += type + "\n\n";
 
-            // box.SetActive(true);
-            // background.SetActive(true);
             playerToHaz = Vector3.Normalize(playerToHaz);
             float d = Vector3.SignedAngle(forward, playerToHaz, Vector3.forward);
             extra_data.text += "Horizontal angle: " + d.ToString("0.0");
             if(h_dir < 0) {
-                tex.text += " to the left\n";
                 extra_data.text += " left\n\n";
             }
             else {
-                tex.text += " to the right\n";
                 extra_data.text += " right\n\n";
             }
 
@@ -146,32 +160,21 @@ public class RelativePosToPlayer : MonoBehaviour
             float v = Vector3.SignedAngle(forward, playerToHaz, Vector3.up);
             extra_data.text += "Vertical angle: " + v.ToString("0.0");
             if(v_dir > 0) {
-                tex.text += " and down ";
                 extra_data.text += " down\n\n";
             }
             else {
-                tex.text += " and up ";
                 extra_data.text += " down\n\n";
             }
 
             if (v > 60 || d > 60) {
-                tex.text += "out of view\n";
                 extra_data.text += "Out of view\n\n";
             }
             else if (v > 16 || d > 16) {
-                tex.text += "in peripheral\n";
                 extra_data.text += "Peripheral\n\n";
             }
             else extra_data.text += "Direct view\n\n";
 
             taken = false;
-        }
-        else {
-            // background.SetActive(false);
-            // tex.text = "";
-            taken = false;
-            // mine = false;
-            // box.SetActive(false);
         }
         
     }

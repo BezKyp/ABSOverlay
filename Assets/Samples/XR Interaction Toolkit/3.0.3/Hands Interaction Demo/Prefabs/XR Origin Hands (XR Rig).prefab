@@ -1971,6 +1971,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf47ae772fb3421292887025bf9b5820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data_ui: {fileID: 0}
+  renderHazards: 0
+  renderUI: 0
+  renderVoxelGrad: 0
+  renderBlueContainer: 0
   m_ValueInput:
     m_InputSourceMode: 2
     m_InputAction:
@@ -1987,6 +1992,7 @@ MonoBehaviour:
     m_ManualValue: 0
   m_PressThreshold: 0.85
   m_ReleaseThreshold: 0.25
+  is_on: 0
 --- !u!1001 &7747415240148662507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2122,6 +2128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf47ae772fb3421292887025bf9b5820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data_ui: {fileID: 0}
+  renderHazards: 0
+  renderUI: 0
+  renderVoxelGrad: 0
+  renderBlueContainer: 0
   m_ValueInput:
     m_InputSourceMode: 2
     m_InputAction:
@@ -2138,6 +2149,7 @@ MonoBehaviour:
     m_ManualValue: 0
   m_PressThreshold: 0.85
   m_ReleaseThreshold: 0.25
+  is_on: 0
 --- !u!114 &5359434741994886739 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2442306273320644280, guid: 3df3e1220f2164f448701a6de8084f92, type: 3}
