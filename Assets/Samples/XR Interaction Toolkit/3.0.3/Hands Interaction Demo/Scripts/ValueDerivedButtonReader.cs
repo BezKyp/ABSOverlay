@@ -19,11 +19,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
     {
 
         [SerializeField] GameObject data_ui;
-        public bool renderHazards;
-        public bool renderUI;
-
-        public bool renderVoxelGrad;
-        public bool renderBlueContainer;
 
 
 
@@ -77,14 +72,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
         /// </summary>
         void OnDisable()
         {
-            // if (renderHazards == true)
-            // {
-            //     data_ui.SetActive(true);
-            // }
-            // if (renderUI == true)
-            // {
-            //     renderVoxelGrad = true;
-            // }
             
             
             // m_ValueInput?.DisableDirectActionIfModeUsed();
